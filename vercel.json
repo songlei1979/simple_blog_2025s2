@@ -1,0 +1,27 @@
+{
+  "framework": null,
+  "builds": [
+    {
+      "src": "simple_blog_2025s2/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "simple_blog_2025s2/wsgi.py",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE, PUT"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "simple_blog_2025s2/wsgi.py"
+    }
+  ]
+}
