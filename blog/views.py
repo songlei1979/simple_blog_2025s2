@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, UpdateView
 
 from blog.models import Post, Category
 
@@ -24,3 +25,9 @@ class Category_list(ListView):
 class Category_detail(DetailView):
     model = Category
     template_name = "category_detail.html"
+
+class Category_update(UpdateView):
+    model = Category
+    template_name = "category_update.html"
+    fields = ["name"]
+    success_url = reverse_lazy("category_list")
