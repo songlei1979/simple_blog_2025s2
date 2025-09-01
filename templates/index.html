@@ -1,10 +1,22 @@
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-<h1>Home</h1>
-<p>Welcome to my blog!</p>
-</body>
+{% extends "Base.html" %}
+{% block title %}
+    Home
+{% endblock %}
 
-</html>
+{% block content %}
+    <h1>Posts</h1>
+    {% for post in posts %}
+        <p>
+            <a href="{% url 'post_detail' post.pk %}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                {{ post.title }}
+            </a>
+            <a href="#" class="btn btn-secondary">
+                Edit
+            </a>
+            <a href="#" class="btn btn-danger">
+                Delete
+            </a>
+        </p>
+    {% endfor %}
+
+{% endblock %}
