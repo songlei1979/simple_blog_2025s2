@@ -5,6 +5,8 @@
 {% block content %}
     <h1>Categories</h1>
     {% for category in object_list %}
-        {{ category.name }}
+        <a href="{% url 'category_detail' category.pk %}">
+            {{ category.name }}
+        </a>
     {% endfor %}
 {% endblock %}

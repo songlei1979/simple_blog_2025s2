@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from blog.models import Post, Category
 
@@ -20,3 +20,7 @@ def post_detail(request, pk):
 class Category_list(ListView):
     model = Category
     template_name = "category_list.html"
+
+class Category_detail(DetailView):
+    model = Category
+    template_name = "category_detail.html"
