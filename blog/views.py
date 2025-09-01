@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
-from blog.models import Post
+from blog.models import Post, Category
 
 
 # Create your views here.
@@ -15,3 +16,7 @@ def post_detail(request, pk):
     return render(request,
                   "post_detail.html",
                   {"post": post})
+
+class Category_list(ListView):
+    model = Category
+    template_name = "category_list.html"
