@@ -6,17 +6,20 @@ from blog.models import Post, Category
 
 
 # Create your views here.
-def index(request):
-    posts = Post.objects.all()
-    return render(request,
-                  "index.html",
-                  {"posts": posts},)
+class index(ListView):
+    model = Post
+    template_name = "index.html"
 
-def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
-    return render(request,
-                  "post_detail.html",
-                  {"post": post})
+class post_detail(DetailView):
+    model = Post
+    template_name = "post_detail.html"
+
+class post_update(UpdateView):
+    model = Post
+    template_name = "post_update.html"
+    fields = ["title", "body", "header_image", "category"]
+    success_url = reverse_lazy("index")
+
 
 class Category_list(ListView):
     model = Category

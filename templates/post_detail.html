@@ -1,15 +1,15 @@
 {% extends "Base.html" %}
 {% block title %}
-{{ post.title }}
+{{ object.title }}
 {% endblock %}
 
 {% block content %}
-<h2>{{ post.title }}</h2>
+<h2>{{ object.title }}</h2>
     <p>
-        <img src="{{ post.header_image.url }}" alt="">
+        <img src="{{ object.header_image.url }}" alt="">
     </p>
-    <p>{{ post.body }}</p>
-    <p>Created on: {{ post.created_on }}</p>
-    <p>{{ post.author }}</p>
-    <p>Likes: {{ post.likes.count }}</p>
+    <p>{{ object.body }}</p>
+    <p>Created on: {{ object.created_on }}</p>
+    <p>{{ object.author }}</p>
+    <p>Likes: {{ object.likes.count }}</p>
 {% endblock %}
