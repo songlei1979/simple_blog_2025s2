@@ -10,7 +10,7 @@
             <a href="{% url 'post_detail' post.pk %}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                 {{ post.title }}
             </a>
-            <a href="#" class="btn btn-secondary">
+            <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary">
                 Edit
             </a>
             <a href="#" class="btn btn-danger">

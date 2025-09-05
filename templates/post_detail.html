@@ -12,4 +12,6 @@
     <p>Created on: {{ object.created_on }}</p>
     <p>{{ object.author }}</p>
     <p>Likes: {{ object.likes.count }}</p>
+    <p><a href="{% url 'post_update' object.pk %}" class="btn btn-secondary">Edit</a></p>
+    <p><a class="btn btn-danger">Delete</a></p>
 {% endblock %}

@@ -10,15 +10,15 @@ class index(ListView):
     model = Post
     template_name = "index.html"
 
-class post_detail(DetailView):
+class Post_detail(DetailView):
     model = Post
     template_name = "post_detail.html"
 
-class post_update(UpdateView):
+class Post_update(UpdateView):
     model = Post
     template_name = "post_update.html"
     fields = ["title", "body", "header_image", "category"]
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("home")
 
 
 class Category_list(ListView):
