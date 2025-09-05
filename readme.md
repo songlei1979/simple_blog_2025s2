@@ -1,84 +1,48 @@
-# Django Blog App Setup Instructions
+# 📘 Homework: Django Generic Views
 
-## 1. Create Models
+## 🗓️ This Week's Task
 
-* Use the provided `models.py` file.
-* Ensure all models are properly linked to Django's built-in `User` model using `from django.contrib.auth.models import User`.
+The updated files for this week's homework include:
 
-## 2. Install Pillow
+- `views.py`
+- `urls.py`
+- `templates/index.html`
+- `templates/post_detail.html`
+- A new `post_detail` view
 
-```bash
-pip install Pillow
-```
-
-This is required for image upload fields (`ImageField`).
-
-## 3. Set Up Media Directory for Profile and Post Images
-
-In your project settings (`settings.py`), add:
-
-```python
-import os
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-```
-
-In your `urls.py` (project-level), add:
-
-```python
-from django.conf import settings
-from django.conf.urls.static import static
-
-urlpatterns = [
-    # ... your existing urls ...
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-```
-
-Create the folders:
-
-```bash
-mkdir -p media/profile_pics
-mkdir -p media/post_headers
-```
-
-These will store uploaded images.
-
-## 4. Run Migrations
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-## 5. Register Models in `admin.py`
-
-In your app's `admin.py`, register all models:
-
-```python
-from django.contrib import admin
-from .models import Profile, Post, Comment, Category
-
-admin.site.register(Profile)
-admin.site.register(Post)
-admin.site.register(Comment)
-admin.site.register(Category)
-```
+All updates are implemented using **Django’s generic class-based views**, such as `ListView` and `DetailView`.
 
 ---
 
-## 🔁 Optional: Use This Project with a Virtual Environment
+## 📄 What's New
 
-### 1. Create and Activate a Virtual Environment
+### 1. `views.py`
+- Added or updated to use Django's **generic views** (`ListView`, `DetailView`)
+- Displays a list of posts on the homepage and shows detailed view for individual posts
 
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+### 2. `urls.py`
+- URL patterns updated to route to the **generic views** for listing and detail pages
 
-### 2. Install Dependencies
+### 3. `index.html`
+- Displays a list of posts using data passed from the `ListView`
 
-```bash
-pip install -r requirements.txt
-```
+### 4. `post_detail.html`
+- Displays detailed content of a single post using the `DetailView`
 
-### 3. Remember change your database settings in settings.py
+---
+
+## 📝 Instructions
+
+1. Review the structure and logic of the generic views.
+2. Understand how templates are connected to the views.
+3. Observe how the URL pattern triggers the correct generic view.
+4. Try modifying the templates to change the layout or add features like author name or post date.
+
+---
+
+## 🆘 Need Help?
+
+If you're unsure or face issues completing this task, feel free to **email me** or ask during the next tutorial session.
+
+---
+
