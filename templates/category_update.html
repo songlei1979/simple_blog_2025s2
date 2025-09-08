@@ -5,7 +5,7 @@
 
 {% block content %}
 <h1>Update Category</h1>
-    <form method="post" action="">
+    <form method="post" enctype='multipart/form-data'>
            {% csrf_token %}
         {{ form.as_p }}
     <button>Update</button>
