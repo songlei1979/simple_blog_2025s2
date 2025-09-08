@@ -1,6 +1,7 @@
 from django.urls import path
 
-from blog.views import index, Post_detail, Category_list, Category_detail, Category_update, Post_update
+from blog.views import index, Post_detail, Category_list, Category_detail, Category_update, Post_update, base_view, \
+    search
 
 urlpatterns = [
     path("", index.as_view(), name="home"),
@@ -13,5 +14,6 @@ urlpatterns = [
          name="category_detail"),
     path("category_update/<int:pk>",
          Category_update.as_view(),
-         name="category_update")
+         name="category_update"),
+    path("search/", search, name="search")
 ]

@@ -4,6 +4,9 @@ from django.views.generic import ListView, DetailView, UpdateView
 
 from blog.models import Post, Category
 
+def base_view(request):
+    categories = Category.objects.all()
+    return {"categories": categories}
 
 # Create your views here.
 class index(ListView):
@@ -34,3 +37,12 @@ class Category_update(UpdateView):
     template_name = "category_update.html"
     fields = ["name"]
     success_url = reverse_lazy("category_list")
+
+def search(request):
+    query = request.POST.get("search_context")
+
+    posts = Post.objects.filter(body__icontains=query)
+    print("type", type(posts))
+    return render(request,
+                  "search.html",
+                  {"posts": posts})
