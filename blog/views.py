@@ -25,13 +25,6 @@ class Post_update(UpdateView):
     form_class = PostForm
     success_url = reverse_lazy("home")
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        if self.request.FILES:
-            print("Uploaded files:", self.request.FILES)  # Debug
-        print("Updated header_image:", form.instance.header_image)  # Debug
-        return response
-
 class Category_list(ListView):
     model = Category
     template_name = "category_list.html"
@@ -66,7 +59,6 @@ class Post_create(CreateView):
     success_url = reverse_lazy("home")
 
     def form_valid(self, form):
-        # form.instance.author = self.request.user
-        form.instance.author = User.objects.first()
+        form.instance.author = self.request.user
         return super().form_valid(form)
 

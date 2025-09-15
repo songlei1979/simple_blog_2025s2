@@ -4,22 +4,32 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+        <p>Hello: {{ user.username }}</p>
+    {% endif %}
+
     <h1>Posts</h1>
-    <a href="{% url 'post_create' %}" 
+    <a href="{% url 'post_create' %}"
        class="btn btn-primary">
         Create Post
     </a>
     {% for post in object_list %}
         <p>
-            <a href="{% url 'post_detail' post.pk %}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                {{ post.title }}
+            <a href="{% url 'post_detail' post.pk %}"
+               class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                {{ post.title }} {{ post.author.username }}
             </a>
-            <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary">
-                Edit
-            </a>
-            <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">
-                Delete
-            </a>
+            {% if user.is_authenticated %}
+                {% if user == post.author or user.is_superuser %}
+                    <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary">
+                        Edit
+                    </a>
+                    <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">
+                        Delete
+                    </a>
+                {% endif %}
+            {% endif %}
+
         </p>
     {% endfor %}
 
