@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -24,7 +25,7 @@ class Post(models.Model):
     header_image = models.ImageField(upload_to='post_headers/', blank=True, null=True)
     title_tag = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = RichTextField()
     post_date = models.DateTimeField(auto_now_add=True)
     snippet = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)

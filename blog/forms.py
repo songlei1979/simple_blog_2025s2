@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from .models import Post
 
@@ -19,11 +20,6 @@ class PostForm(forms.ModelForm):
             "header_image": forms.ClearableFileInput(attrs={
                 "class": "form-control"
             }),
-            "body": forms.Textarea(attrs={
-                "class": "form-control",
-                "rows": 5,
-                "placeholder": "Write your post content here..."
-            }),
             "snippet": forms.TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Enter a short summary (snippet)"
@@ -31,4 +27,5 @@ class PostForm(forms.ModelForm):
             "category": forms.Select(attrs={
                 "class": "form-control"
             }),
+            "body": forms.CharField(widget=CKEditorWidget())
         }

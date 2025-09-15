@@ -4,10 +4,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Update Post</h1>
-    <form method="post" action="">
-           {% csrf_token %}
+    <h1>Update Post</h1>
+    <form method="post" type="multipart/form-data">
+        {% csrf_token %}
         {{ form.as_p }}
-    <button>Update</button>
+        {% if form.errors %}
+            <div class="errors">{{ form.errors }}</div>
+        {% endif %}
+        <button>Update</button>
     </form>
 {% endblock %}
