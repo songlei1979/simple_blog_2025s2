@@ -22,11 +22,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from blog.views import register
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("blog.urls")),
     path("login", LoginView.as_view(), name="login"),
     path("logout", LogoutView.as_view(), name="logout"),
+    path("register", register, name="register")
 ]
 
 if settings.DEBUG:
