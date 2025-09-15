@@ -5,9 +5,12 @@ Create Post
 {% endblock %}
 
 {% block content %}
-<form method="post" enctype='multipart/form-data'>
+<form method="post" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_p }}
+    {% if form.errors %}
+        <div class="errors">{{ form.errors }}</div>
+    {% endif %}
 <button>Create</button>
 </form>
 {% endblock %}

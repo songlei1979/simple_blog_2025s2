@@ -5,9 +5,12 @@
 
 {% block content %}
 <h1>Update Category</h1>
-    <form method="post" enctype='multipart/form-data'>
+    <form method="post" enctype="multipart/form-data">
            {% csrf_token %}
         {{ form.as_p }}
+        {% if form.errors %}
+        <div class="errors">{{ form.errors }}</div>
+    {% endif %}
     <button>Update</button>
     </form>
 {% endblock %}

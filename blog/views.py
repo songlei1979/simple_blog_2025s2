@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
+from blog.forms import PostForm
 from blog.models import Post, Category
 
 def base_view(request):
@@ -20,9 +22,15 @@ class Post_detail(DetailView):
 class Post_update(UpdateView):
     model = Post
     template_name = "post_update.html"
-    fields = ["title", "body", "header_image", "category"]
+    form_class = PostForm
     success_url = reverse_lazy("home")
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.request.FILES:
+            print("Uploaded files:", self.request.FILES)  # Debug
+        print("Updated header_image:", form.instance.header_image)  # Debug
+        return response
 
 class Category_list(ListView):
     model = Category
@@ -54,5 +62,11 @@ class Post_delete(DeleteView):
 class Post_create(CreateView):
     model = Post
     template_name = "post_create.html"
-    fields = "__all__"
+    form_class = PostForm
     success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+        # form.instance.author = self.request.user
+        form.instance.author = User.objects.first()
+        return super().form_valid(form)
+
