@@ -1,14 +1,16 @@
 {% extends "Base.html" %}
 {% block title %}
-{{ object.title }}
+    {{ object.title }}
 {% endblock %}
 
 {% block content %}
-<h2>{{ object.title }}</h2>
-    <p>
-        <img src="{{ object.header_image.url }}" alt="">
-    </p>
-    <p>{{ object.body }}</p>
+    <h2>{{ object.title }}</h2>
+    {% if post.header_image %}
+        <p>
+            <img src="{{ object.header_image.url }}" alt="">
+        </p>
+    {% endif %}
+    <p>{{ object.body|safe }}</p>
     <p>Created on: {{ object.created_on }}</p>
     <p>{{ object.author }}</p>
     <p>Likes: {{ object.likes.count }}</p>

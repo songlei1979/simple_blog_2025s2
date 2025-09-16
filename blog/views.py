@@ -4,8 +4,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
-from blog.forms import PostForm
-from blog.models import Post, Category
+from blog.forms import PostForm, ProfileForm
+from blog.models import Post, Category, Profile
+
 
 def base_view(request):
     categories = Category.objects.all()
@@ -74,3 +75,28 @@ def register(request):
     return render(request,
                   "registration/register.html",
                   {"form": form})
+
+
+class ProfileCreateView(CreateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = "profile_create.html"
+    success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+        # Assign current logged-in user to the profile
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class ProfileDetailView(DetailView):
+    model = Profile
+    template_name = "profile_detail.html"
+    context_object_name = "profile"
+
+
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = "profile_update.html"
+    success_url = reverse_lazy("home")

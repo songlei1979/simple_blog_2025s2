@@ -1,6 +1,6 @@
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-from .models import Post
+from .models import Post, Profile
 
 
 class PostForm(forms.ModelForm):
@@ -28,4 +28,15 @@ class PostForm(forms.ModelForm):
                 "class": "form-control"
             }),
             "body": forms.CharField(widget=CKEditorWidget())
+        }
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["bio", "profile_pic", "website_url", "github_url"]
+        widgets = {
+            "profile_pic": forms.ClearableFileInput(attrs={"class": "form-control"}),
+            "website_url": forms.URLInput(attrs={"class": "form-control", "placeholder": "Enter your website URL"}),
+            "github_url": forms.URLInput(attrs={"class": "form-control", "placeholder": "Enter your GitHub URL"}),
+            "bio": forms.CharField(widget=CKEditorWidget())
         }

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
+    bio = RichTextField(blank=True)
     profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     website_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)

@@ -1,0 +1,20 @@
+{% extends "Base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ profile.user.username }}'s Profile</h2>
+    {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic.url }}" class="img-thumbnail mb-3" width="200">
+    {% endif %}
+    <div class="mb-3">
+        <strong>Bio:</strong>
+        <div>{{ profile.bio|safe }}</div> <!-- render rich text -->
+    </div>
+    {% if profile.website_url %}
+        <p><strong>Website:</strong> <a href="{{ profile.website_url }}" target="_blank">{{ profile.website_url }}</a></p>
+    {% endif %}
+    {% if profile.github_url %}
+        <p><strong>GitHub:</strong> <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
+    {% endif %}
+</div>
+{% endblock %}

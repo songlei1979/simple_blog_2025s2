@@ -7,6 +7,7 @@ Create Post
 {% block content %}
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
+{{ form.media }}
 {{ form.as_p }}
     {% if form.errors %}
         <div class="errors">{{ form.errors }}</div>

@@ -1,6 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block extrahead %}
+        {{ form.media }}
+    {% endblock %}
     <meta charset="UTF-8">
     <title>
         {% block title %}
@@ -33,12 +38,21 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                        <form method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button class="btn btn-link">Logout</button>
-                        </form>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button class="btn btn-link">Logout</button>
+                            </form>
                             
                         </li>
+                        {% if user.profile %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile_update' user.profile.pk %}">Edit Profile</a>
+                        </li>
+                            {% else %}
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile_create'%}">Create Profile</a>
+                        </li>
+                            {% endif %}
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>

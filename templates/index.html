@@ -17,18 +17,23 @@
         <p>
             <a href="{% url 'post_detail' post.pk %}"
                class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                {{ post.title }} {{ post.author.username }}
+                {{ post.title }}
             </a>
-            {% if user.is_authenticated %}
-                {% if user == post.author or user.is_superuser %}
-                    <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary">
-                        Edit
-                    </a>
-                    <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">
-                        Delete
-                    </a>
-                {% endif %}
+            {% if post.author.profile %}
+                <a href="{% url 'profile_detail' post.author.profile.pk %}">{{ post.author.username }}</a>
+            {% else %}
+                <p>{{ post.author.username }} has no profile</p>
             {% endif %}
+        {% if user.is_authenticated %}
+            {% if user == post.author or user.is_superuser %}
+                <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary">
+                    Edit
+                </a>
+                <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">
+                    Delete
+                </a>
+            {% endif %}
+        {% endif %}
 
         </p>
     {% endfor %}
