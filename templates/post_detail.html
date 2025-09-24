@@ -14,6 +14,18 @@
     <p>Created on: {{ object.created_on }}</p>
     <p>{{ object.author }}</p>
     <p>Likes: {{ object.likes.count }}</p>
-    <p><a href="{% url 'post_update' object.pk %}" class="btn btn-secondary">Edit</a></p>
-    <p><a class="btn btn-danger">Delete</a></p>
+    {% if user.is_authenticated %}
+        {% if user == object.author or user.is_superuser %}
+            <p><a href="{% url 'post_update' object.pk %}" class="btn btn-secondary">Edit</a></p>
+            <p><a class="btn btn-danger">Delete</a></p>
+        {% endif %}
+    {% endif %}
+    <h3>Add comment</h3>
+    <form action="{% url 'add_comment' %}" method="post">
+    {% csrf_token %}
+    <p>Name: <input type="text" name="comment_name"></p>
+    <p>Comment: <textarea name="comment_body"></textarea></p>
+        <input type="hidden" name="post_id" value="{{ object.pk }}">
+    <p><input type="submit" value="Add Comment"></p>
+    </form>
 {% endblock %}
