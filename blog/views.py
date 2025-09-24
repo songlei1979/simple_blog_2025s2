@@ -109,3 +109,18 @@ def add_comment(request):
         body = request.POST.get("comment_body")
         Comment.objects.create(post=post, name=name, body=body)
         return redirect("post_detail", pk=post_id)
+
+def like_post(request):
+    if request.method == "POST":
+        post_id = request.POST.get("post_id")
+        post = Post.objects.get(pk=post_id)
+        post.likes.add(request.user)
+        return redirect("post_detail", pk=post_id)
+
+def dislike_post(request):
+    if request.method == "POST":
+        post_id = request.POST.get("post_id")
+        post = Post.objects.get(pk=post_id)
+        post.likes.remove(request.user)
+        return redirect("post_detail", pk=post_id)
+
