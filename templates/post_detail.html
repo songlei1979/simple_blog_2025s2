@@ -20,6 +20,13 @@
             <p><a class="btn btn-danger">Delete</a></p>
         {% endif %}
     {% endif %}
+    <h2>Comments</h2>
+    <hr>
+    {% for comment in object.comments.all.order_by|dictsortreversed:"date_added" %}
+        <p>{{ comment.name }} - {{ comment.date_added|date:"F d, Y P" }}</p>
+        <p>{{ comment.body }}</p>
+    {% endfor %}
+    
     <h3>Add comment</h3>
     <form action="{% url 'add_comment' %}" method="post">
     {% csrf_token %}
