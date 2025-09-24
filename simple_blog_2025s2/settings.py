@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+env = load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -85,11 +89,11 @@ WSGI_APPLICATION = "simple_blog_2025s2.wsgi.app"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": "ep-dark-term-adu1n8b7-pooler.c-2.us-east-1.aws.neon.tech",
-        "PORT": 5432,
-        "NAME": "neondb",
-        "USER": "neondb_owner",
-        "PASSWORD": "npg_dPZOVxDYTt67"
+        "HOST": env.get("DB_HOST"),
+        "PORT": env.get("DB_PORT"),
+        "NAME": env.get("DB_NAME"),
+        "USER": env.get("DB_USER"),
+        "PASSWORD": env.get("DB_PASSWORD"),
     }
 }
 

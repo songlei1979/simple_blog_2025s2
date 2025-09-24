@@ -4,4 +4,5 @@ django-ckeditor==6.7.3
 django-js-asset==3.1.2
 pillow==11.3.0
 psycopg2-binary==2.9.10
+python-dotenv==1.1.1
 sqlparse==0.5.3
