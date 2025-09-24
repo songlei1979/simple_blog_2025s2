@@ -42,17 +42,17 @@
                                 {% csrf_token %}
                                 <button class="btn btn-link">Logout</button>
                             </form>
-                            
+
                         </li>
                         {% if user.profile %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile_update' user.profile.pk %}">Edit Profile</a>
-                        </li>
-                            {% else %}
                             <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile_create'%}">Create Profile</a>
-                        </li>
-                            {% endif %}
+                                <a class="nav-link" href="{% url 'profile_update' user.profile.pk %}">Edit Profile</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'profile_create' %}">Create Profile</a>
+                            </li>
+                        {% endif %}
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>

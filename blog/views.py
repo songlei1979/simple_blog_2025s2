@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
 from blog.forms import PostForm, ProfileForm
-from blog.models import Post, Category, Profile
+from blog.models import Post, Category, Profile, Comment
 
 
 def base_view(request):
@@ -100,3 +100,12 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileForm
     template_name = "profile_update.html"
     success_url = reverse_lazy("home")
+
+def add_comment(request):
+    if request.method == "POST":
+        post_id = request.POST.get("post_id")
+        post = Post.objects.get(pk=post_id)
+        name = request.POST.get("comment_name")
+        body = request.POST.get("comment_body")
+        Comment.objects.create(post=post, name=name, body=body)
+        return redirect("post_detail", pk=post_id)
