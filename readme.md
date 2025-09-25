@@ -309,4 +309,3 @@ class ProfileUpdateView(UpdateView):
 - `bio` and `body` fields both use **CKEditor** for rich text editing.  
 - Uploaded profile pics → `/media/profile_pics/`.  
 - Uploaded CKEditor images → `/media/uploads/`.  
-
