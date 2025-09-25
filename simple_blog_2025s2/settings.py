@@ -89,11 +89,11 @@ WSGI_APPLICATION = "simple_blog_2025s2.wsgi.app"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": env.get("DB_HOST"),
-        "PORT": env.get("DB_PORT"),
-        "NAME": env.get("DB_NAME"),
-        "USER": env.get("DB_USER"),
-        "PASSWORD": env.get("DB_PASSWORD"),
+        "HOST": env.get("PGHOST"),
+        "PORT": env.get("PGPORT"),
+        "NAME": env.get("PGDB"),
+        "USER": env.get("PGUSER"),
+        "PASSWORD": env.get("PGPASSWORD"),
     }
 }
 
