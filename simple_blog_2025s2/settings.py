@@ -15,7 +15,7 @@ import os
 
 from dotenv import load_dotenv
 
-env = load_dotenv()
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,11 +89,11 @@ WSGI_APPLICATION = "simple_blog_2025s2.wsgi.app"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": env.get("PGHOST"),
-        "PORT": env.get("PGPORT"),
-        "NAME": env.get("PGDB"),
-        "USER": env.get("PGUSER"),
-        "PASSWORD": env.get("PGPASSWORD"),
+        "HOST": os.getenv("PGHOST"),
+        "PORT": os.getenv("PGPORT"),
+        "NAME": os.getenv("PGDB"),
+        "USER": os.getenv("PGUSER"),
+        "PASSWORD": os.getenv("PGPASSWORD"),
     }
 }
 
