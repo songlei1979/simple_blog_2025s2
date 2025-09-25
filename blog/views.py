@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView, C
 
 from blog.forms import PostForm, ProfileForm
 from blog.models import Post, Category, Profile, Comment
+from blog.utils import send_email
 
 
 def base_view(request):
@@ -108,6 +109,13 @@ def add_comment(request):
         name = request.POST.get("comment_name")
         body = request.POST.get("comment_body")
         Comment.objects.create(post=post, name=name, body=body)
+        ## send email
+        print("send email out before")
+        print(post.author.email)
+        send_email(post.author.email,
+                   "New Comment",
+                   "You have a new comment on your post")
+        print("send email out after")
         return redirect("post_detail", pk=post_id)
 
 def like_post(request):
